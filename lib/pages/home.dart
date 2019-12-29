@@ -10,19 +10,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Color _color = Colors.deepPurple;
+  bool enableSecondary = false;
   var _gasController = MoneyMaskedTextController();
   var _alcoolController = MoneyMaskedTextController();
   bool _busy = false;
   bool _completed = false;
   String _resultText = 'exemplo';
 
+  Color getColor(BuildContext context, {enableSecondary: false}) {
+    if (enableSecondary) return Theme.of(context).accentColor;
+    return Theme.of(context).primaryColor;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedContainer(
         duration: Duration(milliseconds: 1200),
-        color: this._color,
+        color: this.getColor(context, enableSecondary: this.enableSecondary),
         child: SafeArea(
           child: ListView(
             children: <Widget>[
@@ -51,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       this._alcoolController = MoneyMaskedTextController();
       this._gasController = MoneyMaskedTextController();
       this._busy = false;
-      this._color = Colors.deepPurple;
+      this.enableSecondary = false;
     });
   }
 
@@ -68,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     this.setState(() {
       this._busy = true;
       this._completed = false;
-      this._color = Colors.deepPurpleAccent;
+      this.enableSecondary = true;
     });
 
     return Future.delayed(Duration(seconds: 1), () {

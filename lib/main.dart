@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.deepPurple,
+          accentColor: Colors.deepPurpleAccent,
           fontFamily: 'Big Shoulders Display'),
       home: HomePage(),
     );
